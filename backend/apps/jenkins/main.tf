@@ -33,7 +33,7 @@ resource "aws_security_group" "jenkins_sg" {
 resource "aws_instance" "jenkins" {
   ami = var.ami_id
   instance_type = var.instance_type
-  key_name = var.key_name
+  key_name = aws_key_pair.main_key.key_nam
   vpc_security_group_ids = [aws_security_group.jenkins_sg.id]
 
   root_block_device {
@@ -54,4 +54,11 @@ resource "aws_instance" "jenkins" {
   tags = {
     Name = "Jenkins-server"
   }
+}
+
+#create ec2 key pair
+
+resource "aws_key_pair" "main_key" {
+  key_name = "terraform_key"
+  public_key = file("~/.ssh/terraform_key.pub") # generating this key from the 
 }
