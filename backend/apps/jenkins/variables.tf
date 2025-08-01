@@ -12,7 +12,7 @@ variable "instance_type"{
 
 variable "key_name"{
   description = "AWS Key pair for SSH"
-  type = string
+  default = "terraform_key"
 }
 
 variable "ami_id" {
